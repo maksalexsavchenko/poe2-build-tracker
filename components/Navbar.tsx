@@ -1,24 +1,51 @@
-import Link from "next/link";
+'use client';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-export function Navbar() {
+const links = [
+  { href: '/', label: 'Головна' },
+  { href: '/builds', label: 'Гайди' },
+  { href: '/tracker', label: 'Трекер' },
+];
+
+export default function Navbar() {
+  const pathname = usePathname();
+
   return (
-    <nav className="border-b border-poe-border bg-poe-panel">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        <Link href="/" className="text-poe-highlight font-poe text-xl hover:text-white transition-colors">
-          PoE2 Build Tracker
+    <header className="border-b sticky top-0 z-50" style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
+      <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between gap-4">
+        <Link href="/" className="flex items-center gap-2 font-bold text-lg tracking-wide text-gold shrink-0">
+          <span className="text-2xl">⚔</span>
+          <span>PoE2 Tracker</span>
         </Link>
-        <div className="flex items-center gap-6 text-sm">
-          <Link href="/guides" className="text-poe-text hover:text-poe-highlight transition-colors">
-            Гайди
-          </Link>
-          <Link href="/tracker" className="text-poe-text hover:text-poe-highlight transition-colors">
-            Трекер
-          </Link>
-          <Link href="/login" className="poe-btn text-xs py-1.5 px-3">
+
+        <nav className="flex items-center gap-1 flex-wrap justify-end">
+          {links.map((link) => {
+            const active =
+              pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`px-3 py-1.5 rounded text-sm font-medium transition-colors ${
+                  active
+                    ? 'text-gold bg-[#1e1a0f]'
+                    : 'text-muted hover:text-gold hover:bg-[#1a1a20]'
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+          <Link
+            href="/login"
+            className="px-3 py-1.5 rounded text-sm font-semibold transition-opacity hover:opacity-90 ml-1"
+            style={{ background: 'var(--gold)', color: '#0d0d0f' }}
+          >
             Увійти через PoE
           </Link>
-        </div>
+        </nav>
       </div>
-    </nav>
+    </header>
   );
 }
