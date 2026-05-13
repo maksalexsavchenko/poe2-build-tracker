@@ -4,7 +4,9 @@ import Image from 'next/image';
 import { getGuideById, guides } from '@/lib/guides-data';
 import DownloadBuildButton from '@/components/DownloadBuildButton';
 import GuideContent from '@/components/GuideContent';
+import { AscendancyPassiveMap } from '@/components/AscendancyPassiveMap';
 import { getAscendancy } from '@/lib/classes-data';
+import { loadAscendancyTreeNodes } from '@/lib/poe2-tree/load-tree-data';
 
 export function generateStaticParams() {
   return guides.map((g) => ({ id: g.id }));
@@ -16,6 +18,9 @@ export default async function GuidePage({ params }: { params: Promise<{ id: stri
   if (!guide) notFound();
 
   const asc = getAscendancy(guide.class, guide.ascendancy);
+  const { nodes: ascTreeNodes, descriptions: ascTreeDesc } = await loadAscendancyTreeNodes(
+    guide.ascendancy,
+  );
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
@@ -127,6 +132,12 @@ export default async function GuidePage({ params }: { params: Promise<{ id: stri
           <li>В грі відкрий Build Planner → Import → обери файл</li>
         </ol>
       </div>
+
+      <AscendancyPassiveMap
+        ascendancyName={guide.ascendancy}
+        nodes={ascTreeNodes}
+        descriptions={ascTreeDesc}
+      />
 
       {/* Leveling path — tabbed + skills panel */}
       <div>
