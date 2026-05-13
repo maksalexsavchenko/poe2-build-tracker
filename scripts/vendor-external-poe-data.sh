@@ -1,30 +1,74 @@
 #!/usr/bin/env bash
-# Завантажує відкриті JSON-дані для інтеграції в сайт (без сабмодуля).
+# Завантажує відкриті JSON-дані PoE2 для інтеграції в сайт (без сабмодуля).
 #
-# PoE2 passive (community): https://github.com/marcoaaguiar/poe2-tree
-#   → nodes.json, nodes_desc.json, skills.json, keywords.json
+# Джерело: RePoE (fork) — https://repoe-fork.github.io/poe2/
 #
-# PoE1 official passive export (НЕ PoE2): https://github.com/grindinggear/skilltree-export
-#   → data.json ~6.4MB — опційно, лише якщо потрібен PoE1 / порівняння.
-#   Увімкни:  DOWNLOAD_POE1_SKILLTREE=1 ./scripts/vendor-external-poe-data.sh
+# Завжди: дерево пасивів, ascendancies, геми, моди, базові предмети, унікальні, keywords,
+#         stat_value_handlers, усі stat_translations/*.min.json (~20 файлів).
 #
-# PoE2 MCP (геми/моди, ~4975 nodes / 14269 mods у БД проєкту): https://github.com/HivemindOverlord/poe2-mcp
-#   Це Python MCP-сервер, не статичні JSON у цьому скрипті.
-#   Варіанти: pip install poe2-mcp + launch.py у Cursor/Claude MCP;
-#   або окремий Docker-сервіс з репо (дані в data/ всередині того репо, ~100MB+).
+# Опційно (великі):
+#   DOWNLOAD_REPOE_SKILLS=1          → skills.min.json (~12 MB)
+#   DOWNLOAD_REPOE_STATS_BY_FILE=1  → stats_by_file.min.json (~8.6 MB)
+#
+# PoE1: DOWNLOAD_POE1_SKILLTREE=1 — skilltree-export data.json
+#
+# PoE2 MCP: https://github.com/HivemindOverlord/poe2-mcp — окремо.
 
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-OUT="$ROOT/public/data/poe2-tree"
+REPOE_OUT="$ROOT/public/data/repoe-poe2"
 POE1_OUT="$ROOT/public/data/poe1-skilltree-export"
 
-mkdir -p "$OUT" "$POE1_OUT"
+rm -rf "$ROOT/public/data/poe2-tree"
 
-BASE_POE2="https://raw.githubusercontent.com/marcoaaguiar/poe2-tree/main/src/lib/data"
-for f in nodes.json nodes_desc.json skills.json keywords.json; do
-  echo "Fetching poe2-tree: $f"
-  curl -fsSL "$BASE_POE2/$f" -o "$OUT/$f"
+mkdir -p "$REPOE_OUT/stat_translations" "$POE1_OUT"
+
+REPOE="https://repoe-fork.github.io/poe2"
+
+echo "Fetching RePoE: passive tree Default (~3MB) → passive-tree-Default.min.json"
+curl -fsSL "$REPOE/passive_skill_trees/Default.min.json" -o "$REPOE_OUT/passive-tree-Default.min.json"
+
+echo "Fetching RePoE: ascendancies.min.json"
+curl -fsSL "$REPOE/ascendancies.min.json" -o "$REPOE_OUT/ascendancies.min.json"
+
+echo "Fetching RePoE: skill_gems.min.json"
+curl -fsSL "$REPOE/skill_gems.min.json" -o "$REPOE_OUT/skill_gems.min.json"
+
+echo "Fetching RePoE: mods.min.json (~7.3MB)"
+curl -fsSL "$REPOE/mods.min.json" -o "$REPOE_OUT/mods.min.json"
+
+echo "Fetching RePoE: base_items.min.json (~2.1MB)"
+curl -fsSL "$REPOE/base_items.min.json" -o "$REPOE_OUT/base_items.min.json"
+
+echo "Fetching RePoE: uniques.min.json"
+curl -fsSL "$REPOE/uniques.min.json" -o "$REPOE_OUT/uniques.min.json"
+
+echo "Fetching RePoE: keywords.min.json"
+curl -fsSL "$REPOE/keywords.min.json" -o "$REPOE_OUT/keywords.min.json"
+
+echo "Fetching RePoE: stat_value_handlers.min.json"
+curl -fsSL "$REPOE/stat_value_handlers.min.json" -o "$REPOE_OUT/stat_value_handlers.min.json"
+
+echo "Fetching RePoE: stat_translations/*.min.json"
+curl -fsSL "$REPOE/stat_translations/" | sed -n 's/.*href="\.\/\([^"]*\.min\.json\)".*/\1/p' | while IFS= read -r stf; do
+  [[ -z "$stf" ]] && continue
+  echo "  → stat_translations/$stf"
+  curl -fsSL "$REPOE/stat_translations/$stf" -o "$REPOE_OUT/stat_translations/$stf"
 done
+
+if [[ "${DOWNLOAD_REPOE_SKILLS:-}" == "1" ]]; then
+  echo "Fetching RePoE: skills.min.json (~12MB) [DOWNLOAD_REPOE_SKILLS=1]"
+  curl -fsSL "$REPOE/skills.min.json" -o "$REPOE_OUT/skills.min.json"
+else
+  echo "Skip skills.min.json (set DOWNLOAD_REPOE_SKILLS=1 for ~12MB)"
+fi
+
+if [[ "${DOWNLOAD_REPOE_STATS_BY_FILE:-}" == "1" ]]; then
+  echo "Fetching RePoE: stats_by_file.min.json (~8.2MB) [DOWNLOAD_REPOE_STATS_BY_FILE=1]"
+  curl -fsSL "$REPOE/stats_by_file.min.json" -o "$REPOE_OUT/stats_by_file.min.json"
+else
+  echo "Skip stats_by_file.min.json (set DOWNLOAD_REPOE_STATS_BY_FILE=1 for ~8.2MB)"
+fi
 
 if [[ "${DOWNLOAD_POE1_SKILLTREE:-}" == "1" ]]; then
   echo "Fetching grindinggear/skilltree-export data.json (PoE1, large)..."
@@ -33,4 +77,4 @@ else
   echo "Skip PoE1 skilltree-export (set DOWNLOAD_POE1_SKILLTREE=1 to download ~6.4MB data.json)"
 fi
 
-echo "Done. Files under public/data/ — доступні як /data/poe2-tree/*.json"
+echo "Done. RePoE → public/data/repoe-poe2/ (API: /api/game/repoe/…)."

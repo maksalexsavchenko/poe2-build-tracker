@@ -49,4 +49,10 @@ export interface Guide {
   levelingPath: LevelingCheckpoint[];
   pros: string[];
   cons: string[];
+  /**
+   * Короткий id з URL Maxroll: `https://maxroll.gg/poe2/tree/{id}/0`
+   * (як `data-poe2-profile` у їхньому embed). Якщо задано — показуємо кнопку «повне дерево на Maxroll».
+   * У iframe з нашого домену їхній планер не відкриється (SAMEORIGIN), тільки посилання.
+   */
+  maxrollTreeProfile?: string;
 }

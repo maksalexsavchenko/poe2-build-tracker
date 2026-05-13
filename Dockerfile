@@ -7,10 +7,11 @@ COPY package.json package-lock.json* ./
 RUN npm ci
 
 FROM base AS builder
-RUN apk add --no-cache libc6-compat openssl
+RUN apk add --no-cache libc6-compat openssl curl bash
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+RUN bash scripts/vendor-external-poe-data.sh
 RUN npx prisma generate
 RUN npm run build
 

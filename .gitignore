@@ -7,3 +7,6 @@ node_modules/
 .DS_Store
 *.log
 prisma/migrations/
+
+# RePoE (npm run vendor:game-data / Docker) — великі JSON, не в git
+public/data/repoe-poe2/
