@@ -1,6 +1,11 @@
 /**
  * Офіційні та community джерела даних PoE / PoE2.
  * Оновлення файлів: npm run vendor:game-data
+ *
+ * Ланцюжок даних PoE2 для цього проєкту:
+ * 1) клієнт PoE2 (Content.ggpk) → 2) екосистема ggpk-exposed (розпаковка / індексатори) →
+ * 3) repoe-fork зливає витяг у JSON на GitHub Pages → 4) vendor-external-poe-data.sh
+ *    копіює потрібні файли в public/data/repoe-poe2/.
  */
 
 export const DATA_SOURCES = {
@@ -11,17 +16,31 @@ export const DATA_SOURCES = {
     rawDataJson:
       "https://raw.githubusercontent.com/grindinggear/skilltree-export/master/data.json",
   },
+  /**
+   * Інструменти для роботи з Content.ggpk клієнта Path of Exile / PoE2 (розпаковка, індекси CDN).
+   * Готові JSON-дампи для сайту беремо з repoe-fork (repoePoe2), а не збираємо ggpk у CI.
+   */
+  ggpkExposed: {
+    org: "https://github.com/ggpk-exposed",
+    /** Приклади репозиторіїв у організації */
+    repos: {
+      exposer: "https://github.com/ggpk-exposed/exposer",
+      ggpker: "https://github.com/ggpk-exposed/ggpker",
+      ggpkIndexServer: "https://github.com/ggpk-exposed/ggpk-index-server",
+      poecdnBundleIndex: "https://github.com/ggpk-exposed/poecdn-bundle-index",
+    },
+  },
   /** MCP-сервер: геми, моди, пасиви в SQLite/JSON усередині репо — для AI або окремого бекенду. */
   poe2Mcp: {
     repo: "https://github.com/HivemindOverlord/poe2-mcp",
     docs: "https://github.com/HivemindOverlord/poe2-mcp#readme",
   },
   /**
-   * RePoE (fork): витяг JSON з клієнта PoE2.
-   * Локальна копія: public/data/repoe-poe2/ (див. scripts/vendor-external-poe-data.sh).
-   * HTTP: GET /api/game/repoe/<відносний шлях> — наприклад mods.min.json або stat_translations/skill_stat_descriptions.min.json
+   * RePoE (fork): JSON з клієнта, зібрані та викладені на GitHub Pages.
+   * PoE1 (корінь каталогу): browsePoe1. PoE2: browse — саме звідси тягне npm run vendor:game-data.
    */
   repoePoe2: {
+    browsePoe1: "https://repoe-fork.github.io/",
     browse: "https://repoe-fork.github.io/poe2/",
     repo: "https://github.com/repoe-fork/repoe-fork",
     rawFile: (name: string) => `https://repoe-fork.github.io/poe2/${name}`,

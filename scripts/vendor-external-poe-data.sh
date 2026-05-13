@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 # Завантажує відкриті JSON-дані PoE2 для інтеграції в сайт (без сабмодуля).
 #
-# Джерело: RePoE (fork) — https://repoe-fork.github.io/poe2/
+# Ланцюжок: Content.ggpk (клієнт) → екстрактори https://github.com/ggpk-exposed →
+# JSON на https://repoe-fork.github.io/poe2/ → цей скрипт (curl у public/data/repoe-poe2/).
+#
+# Джерело JSON: RePoE fork — https://repoe-fork.github.io/poe2/
+# (корінь PoE1-дампів: https://repoe-fork.github.io/ )
 #
 # Завжди: дерево пасивів, ascendancies, геми, моди, базові предмети, унікальні, keywords,
 #         stat_value_handlers, усі stat_translations/*.min.json (~20 файлів).

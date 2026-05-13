@@ -39,6 +39,29 @@ export function GuidePlannerLinks({ guide, ascendancyClassId }: Props) {
         <code className="text-[11px]">/api/game/repoe/mods.min.json</code>,{' '}
         <code className="text-[11px]">/api/game/repoe/stat_translations/passive_skill_stat_descriptions.min.json</code> тощо.
       </p>
+      <p className="text-xs leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+        Сирі бандли клієнта зазвичай розпаковують інструментами з{' '}
+        <a
+          href={DATA_SOURCES.ggpkExposed.org}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline"
+          style={{ color: 'var(--gold-light)' }}
+        >
+          github.com/ggpk-exposed
+        </a>
+        ; каталог PoE1 (інший ігровий клієнт) —{' '}
+        <a
+          href={DATA_SOURCES.repoePoe2.browsePoe1}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline"
+          style={{ color: 'var(--gold-light)' }}
+        >
+          repoe-fork.github.io
+        </a>
+        .
+      </p>
 
       {maxrollUrl ? (
         <div className="space-y-2">
