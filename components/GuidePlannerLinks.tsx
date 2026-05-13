@@ -1,7 +1,6 @@
 import type { Guide } from '@/lib/types';
 import { DATA_SOURCES } from '@/lib/vendor/data-sources';
 
-const POB_POE2 = 'https://github.com/PathOfBuildingCommunity/PathOfBuilding-PoE2';
 const REPOE = DATA_SOURCES.repoePoe2.browse;
 const REPOE_TREES = DATA_SOURCES.repoePoe2.passiveTreesIndex;
 
@@ -113,12 +112,19 @@ export function GuidePlannerLinks({ guide, ascendancyClassId }: Props) {
           — альтернативний переглядач; координати там не збігаються 1:1 з RePoE на нашому сайті.
         </li>
         <li>
-          <a href={POB_POE2} target="_blank" rel="noopener noreferrer" className="underline" style={{ color: 'var(--gold-light)' }}>
-            Path of Building — PoE2
-          </a>{' '}
-          (десктоп): імпорт .build, повний калькулятор —{' '}
           <a
-            href={`${POB_POE2}/releases`}
+            href={DATA_SOURCES.pathOfBuildingPoe2.repo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline"
+            style={{ color: 'var(--gold-light)' }}
+          >
+            Path of Building — PoE2
+          </a>
+          {' '}
+          (десктоп): імпорт .build —{' '}
+          <a
+            href={DATA_SOURCES.pathOfBuildingPoe2.releases}
             target="_blank"
             rel="noopener noreferrer"
             className="underline"
@@ -126,7 +132,18 @@ export function GuidePlannerLinks({ guide, ascendancyClassId }: Props) {
           >
             релізи
           </a>
-          .
+          . Дані дерева в репо:{' '}
+          <a
+            href={DATA_SOURCES.pathOfBuildingPoe2.treeDataBrowse}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline"
+            style={{ color: 'var(--gold-light)' }}
+          >
+            src/TreeData
+          </a>{' '}
+          (<code className="text-[11px]">tree.json</code> у <code className="text-[11px]">0_1</code>,{' '}
+          <code className="text-[11px]">0_2</code>…).
         </li>
       </ul>
     </div>

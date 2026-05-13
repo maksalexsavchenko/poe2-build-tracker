@@ -6,6 +6,7 @@
  * 1) клієнт PoE2 (Content.ggpk) → 2) екосистема ggpk-exposed (розпаковка / індексатори) →
  * 3) repoe-fork зливає витяг у JSON на GitHub Pages → 4) vendor-external-poe-data.sh
  *    копіює потрібні файли в public/data/repoe-poe2/.
+ * Path of Building PoE2 паралельно публікує власний експорт дерева (tree.json) у src/TreeData на гілці dev.
  */
 
 export const DATA_SOURCES = {
@@ -62,6 +63,19 @@ export const DATA_SOURCES = {
     optionalSkills: "skills.min.json" as const,
     /** Опційно: DOWNLOAD_REPOE_STATS_BY_FILE=1 */
     optionalStatsByFile: "stats_by_file.min.json" as const,
+  },
+  /**
+   * Path of Building — PoE2: десктоп-планер. У репо є TreeData: tree.json / tree.lua та арти
+   * по версіях дерева (підкаталоги 0_1, 0_2, …, legion). Формат інший, ніж у RePoE passive_skill_trees.
+   */
+  pathOfBuildingPoe2: {
+    repo: "https://github.com/PathOfBuildingCommunity/PathOfBuilding-PoE2",
+    branch: "dev" as const,
+    treeDataBrowse:
+      "https://github.com/PathOfBuildingCommunity/PathOfBuilding-PoE2/tree/dev/src/TreeData",
+    releases: "https://github.com/PathOfBuildingCommunity/PathOfBuilding-PoE2/releases",
+    rawTreeJson: (treeVersion: string) =>
+      `https://raw.githubusercontent.com/PathOfBuildingCommunity/PathOfBuilding-PoE2/dev/src/TreeData/${treeVersion}/tree.json`,
   },
 } as const;
 

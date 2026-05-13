@@ -7,6 +7,9 @@
 # Джерело JSON: RePoE fork — https://repoe-fork.github.io/poe2/
 # (корінь PoE1-дампів: https://repoe-fork.github.io/ )
 #
+# Довідник: Path of Building PoE2 — src/TreeData (tree.json за версіями 0_1, …) на гілці dev:
+#   https://github.com/PathOfBuildingCommunity/PathOfBuilding-PoE2/tree/dev/src/TreeData
+#
 # Завжди: дерево пасивів, ascendancies, геми, моди, базові предмети, унікальні, keywords,
 #         stat_value_handlers, усі stat_translations/*.min.json (~20 файлів).
 #
