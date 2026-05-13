@@ -2,10 +2,15 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 
+export const revalidate = 120;
+
 export const metadata: Metadata = {
   title: "PoE2 Build Tracker",
   description: "Гайди та прогрес-трекер для Path of Exile 2. UA/RU спільнота.",
   keywords: ["Path of Exile 2", "PoE2", "build guide", "левелінг", "трекер"],
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+  },
 };
 
 export default function RootLayout({
