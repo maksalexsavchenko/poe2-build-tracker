@@ -1,0 +1,33 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 46.225.180.134
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -e
+            cd /app
+
+            echo "=== Pull latest ==="
+            git pull origin main
+
+            echo "=== Build & restart ==="
+            docker compose build nextjs
+            docker compose up -d
+
+            echo "=== Migrate DB ==="
+            docker compose exec -T nextjs npx prisma migrate deploy
+
+            echo "=== Done ==="
+            docker compose ps

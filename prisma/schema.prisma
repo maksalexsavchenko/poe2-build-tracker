@@ -1,0 +1,110 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String    @id @default(cuid())
+  gggAccountName String?   @unique
+  email          String?
+  accessToken    String?
+  refreshToken   String?
+  createdAt      DateTime  @default(now())
+
+  characters     Character[]
+  savedBuilds    UserBuild[]
+}
+
+model Character {
+  id            String    @id @default(cuid())
+  userId        String
+  name          String
+  class         String
+  ascendancy    String?
+  level         Int
+  realm         String    @default("poe2")
+
+  passiveHashes Int[]
+  equipment     Json
+  gems          Json
+
+  lastSyncedAt  DateTime
+  createdAt     DateTime  @default(now())
+
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  progress      BuildProgress[]
+
+  @@unique([userId, name])
+}
+
+model Guide {
+  id          String    @id @default(cuid())
+  authorId    String?
+  title       String
+  slug        String    @unique
+  class       String
+  ascendancy  String?
+  description String?
+
+  levelingPath Json
+
+  tags        String[]
+  isPublic    Boolean   @default(false)
+  isVerified  Boolean   @default(false)
+
+  viewCount   Int       @default(0)
+  likes       Int       @default(0)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  buildFile   BuildFile?
+  progress    BuildProgress[]
+  userBuilds  UserBuild[]
+}
+
+model BuildFile {
+  id        String   @id @default(cuid())
+  guideId   String   @unique
+  content   String
+  version   Int      @default(1)
+  createdAt DateTime @default(now())
+
+  guide     Guide    @relation(fields: [guideId], references: [id], onDelete: Cascade)
+}
+
+model BuildProgress {
+  id            String    @id @default(cuid())
+  characterId   String
+  guideId       String
+
+  progressScore Float
+  passivesScore Float
+  gemsScore     Float
+  gearScore     Float
+
+  nextSteps     Json
+
+  calculatedAt  DateTime  @default(now())
+
+  character     Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  guide         Guide     @relation(fields: [guideId], references: [id], onDelete: Cascade)
+
+  @@unique([characterId, guideId])
+}
+
+model UserBuild {
+  id        String   @id @default(cuid())
+  userId    String
+  guideId   String
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  guide     Guide    @relation(fields: [guideId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, guideId])
+}

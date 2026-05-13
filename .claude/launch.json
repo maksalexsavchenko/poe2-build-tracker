@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "poe2-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "/Users/maksalexsavchenko/MyProjects/poe2-builder-app"],
+      "port": 3000
+    }
+  ]
+}

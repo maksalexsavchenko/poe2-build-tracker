@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0d0d0d;
+  --foreground: #a38d6d;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: Georgia, serif;
+}
+
+@layer components {
+  .poe-panel {
+    @apply bg-poe-panel border border-poe-border rounded-sm p-4;
+  }
+
+  .poe-btn {
+    @apply bg-poe-gold text-white px-4 py-2 rounded-sm hover:brightness-110 transition-all text-sm font-medium;
+  }
+
+  .poe-btn-outline {
+    @apply border border-poe-border text-poe-highlight px-4 py-2 rounded-sm hover:border-poe-gold transition-all text-sm;
+  }
+}
