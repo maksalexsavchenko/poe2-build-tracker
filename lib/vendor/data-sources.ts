@@ -1,6 +1,7 @@
 /**
  * Офіційні та community джерела даних PoE / PoE2.
  * Оновлення файлів: npm run vendor:game-data
+ * Опційно дерево PoB (tree.json + PNG для «ігрового» вигляду): npm run vendor:pob-tree
  *
  * Ланцюжок даних PoE2 для цього проєкту:
  * 1) клієнт PoE2 (Content.ggpk) → 2) екосистема ggpk-exposed (розпаковка / індексатори) →

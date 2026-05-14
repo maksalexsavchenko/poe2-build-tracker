@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint .",
     "vendor:game-data": "bash scripts/vendor-external-poe-data.sh",
+    "vendor:pob-tree": "node scripts/vendor-pob-tree.mjs",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:push": "prisma db push",

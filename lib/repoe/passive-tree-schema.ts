@@ -21,6 +21,7 @@ export type RepoePassiveDef = {
   id: string;
   is_keystone: boolean;
   is_notable: boolean;
+  is_jewel_socket?: boolean;
   name: string;
   stats: Record<string, number>;
 };

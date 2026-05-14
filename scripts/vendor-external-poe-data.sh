@@ -19,14 +19,17 @@
 #
 # PoE1: DOWNLOAD_POE1_SKILLTREE=1 — skilltree-export data.json
 #
-# PoE2 MCP: https://github.com/HivemindOverlord/poe2-mcp — окремо.
+# Опційно: дерево Path of Building (tree.json + PNG) для PobPassiveTreeViewer
+# npm run vendor:pob-tree
 
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 REPOE_OUT="$ROOT/public/data/repoe-poe2"
 POE1_OUT="$ROOT/public/data/poe1-skilltree-export"
 
-rm -rf "$ROOT/public/data/poe2-tree"
+# Раніше тут було `rm -rf public/data/poe2-tree` — лишок від епохи, коли цю
+# папку планували вендорити окремим скриптом. Тепер `public/data/poe2-tree/`
+# закомічена в репо і споживається PassiveTreeViewer-ом, тому видаляти її НЕ можна.
 
 mkdir -p "$REPOE_OUT/stat_translations" "$POE1_OUT"
 
