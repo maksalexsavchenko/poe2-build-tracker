@@ -8,6 +8,7 @@ const nextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "web.poecdn.com" },
       { protocol: "https", hostname: "poe2db.tw" },
+      { protocol: "https", hostname: "cdn.poe2db.tw" },
     ],
   },
 };

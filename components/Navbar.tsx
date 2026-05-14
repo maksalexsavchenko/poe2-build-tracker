@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 const links = [
   { href: '/', label: 'Головна' },
   { href: '/builds', label: 'Гайди' },
+  { href: '/wiki/uniques', label: 'Унікалки' },
   { href: '/tracker', label: 'Трекер' },
 ];
 
