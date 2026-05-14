@@ -1,0 +1,380 @@
+@import 'common';
+
+.poe2planner-wrapper {
+  .poe2-SkillGems {
+    width: 340px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+
+    .poe2-BkgStack {
+      background: #000000;
+      width: 100%;
+
+      .poe2-TitleBarBkg {
+        position: relative;
+        z-index: 1;
+        background-image: url(~assets/ui/titlebar.webp);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        width: 100%;
+        aspect-ratio: 972 / 156;
+
+        .poe2-TitleBar-Title {
+          position: absolute;
+          top: 59%;
+          left: 50%;
+          transform: translateX(-50%);
+          color: black;
+          font-size: 14px;
+          font-family: OptimusPrinceps, FontinSmallCaps, Verdana, Arial,
+            Helvetica, sans-serif;
+          line-height: 1.2em;
+          text-shadow: 0 0 1px #000;
+        }
+      }
+
+      .poe2-SkillsBkg {
+        position: relative;
+        margin-top: -16px;
+        background-image: url(~assets/ui/skillpanelframe.webp);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        width: 100%;
+        aspect-ratio: 1312 / 1584;
+      }
+    }
+
+    .poe2-step-title {
+      position: absolute;
+      z-index: 1;
+      text-align: center;
+      color: #aa9e82;
+      font-family: FontinSmallCaps, Verdana, Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      height: 25px;
+      text-shadow: 0 0 5px #000;
+      line-height: normal;
+
+      top: 12%;
+      left: 50%;
+      transform: translateX(-50%);
+
+      width: 96%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+
+      .poe2-step-title-text {
+        max-width: 60%;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      button.poe2-step-title-btn:not([class^='_actionButton']):not(
+          [class^='toolbar-item']
+        ):not([class^='_popupItem']):not(
+          [class^='table-cell-action-button']
+        ):not([class^='_buttonWrapper']) {
+        user-select: none;
+        cursor: pointer;
+        border-width: 1px;
+
+        height: 34px;
+        padding: 0 14px;
+        box-shadow: none;
+        font-size: 14px;
+        align-items: center;
+        // color: #fb0;
+
+        background: rgb(var(--maxroll-color-dark-4));
+        color: rgb(var(--maxroll-color-white-1));
+
+        border-color: rgb(var(--maxroll-color-blue));
+        box-shadow: 0 0 1px 0px rgb(var(--maxroll-color-blue)) inset,
+          0 0 1px 0px rgb(var(--maxroll-color-blue));
+
+        &:not(:disabled) {
+          &:hover {
+            background: rgb(var(--maxroll-color-blue));
+            border-color: rgb(var(--maxroll-color-blue));
+            box-shadow: 0 0 1px 0px rgb(var(--maxroll-color-blue)) inset,
+              0 0 1px 0px rgb(var(--maxroll-color-blue));
+            & > * {
+              background: rgb(var(--maxroll-color-white-1));
+            }
+          }
+          &:active,
+          &.active {
+            background: rgb(var(--maxroll-color-dark-4));
+            border-color: rgb(var(--maxroll-color-blue));
+            box-shadow: 0 0 1px 0px rgb(var(--maxroll-color-blue)) inset,
+              0 0 1px 0px rgb(var(--maxroll-color-blue));
+          }
+        }
+        &:disabled {
+          background: rgb(var(--maxroll-color-dark-4));
+          border: rgb(var(--maxroll-color-dark-5));
+          color: rgb(var(--maxroll-color-dark-5));
+          .buttonIcon {
+            background-color: rgb(var(--maxroll-color-dark-5));
+          }
+        }
+
+        height: 28px;
+        padding: 0 8px;
+        &:first-child {
+          padding-left: 0px;
+        }
+        &:last-child {
+          padding-right: 0px;
+        }
+
+        & > * {
+          background: rgb(var(--maxroll-color-blue));
+        }
+      }
+    }
+
+    .poe2-body {
+      overflow: auto;
+      scrollbar-gutter: stable;
+      width: 100%;
+      max-height: 348px;
+      position: absolute;
+      top: 20.2%;
+      left: 0;
+      padding: 0 4.4% 0 7%;
+    }
+    .poe2-skill-slot {
+      background-image: url(~assets/ui/skillpanelexpandgem.webp);
+      background-repeat: no-repeat;
+      background-size: contain;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      aspect-ratio: 1136 / 260;
+      margin-bottom: 8px;
+    }
+    .poe2-gem-list-main-skill {
+      margin: 0.5% 0 0 9.2%;
+      width: 6.9%;
+      aspect-ratio: 1 / 1;
+      & > div {
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .poe2-gem-list-main-skill-desc {
+      font-family: FontinSmallCaps, Verdana, Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      color: #aa9e82;
+    }
+    .poe2-skills {
+      position: relative;
+      z-index: 1;
+      min-height: 64px;
+    }
+    .poe2-item-type {
+      font-size: 44px;
+      width: 1em;
+      height: 1em;
+      background: url(~assets/ui/item_types.png) no-repeat;
+    }
+    .poe2-item-item {
+      box-sizing: border-box;
+      border: 1px solid #223;
+      background-color: #113;
+      border-radius: 4px;
+      width: 40px;
+      height: 40px;
+      margin: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+        max-width: 32px;
+        max-height: 32px;
+      }
+    }
+    .poe2-gem-list-preview {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      height: 40%;
+      position: relative;
+      gap: 4%;
+
+      .poe2-SkillsMainBkg {
+        position: absolute;
+        width: 22%;
+        top: 26%;
+        left: 68.6%;
+        background-image: url(~assets/ui/skillpanelamountbg.webp);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        aspect-ratio: 248 / 56;
+        overflow: hidden;
+
+        display: flex;
+        align-items: center;
+
+        .poe2-SkillsMainWeap {
+          height: 80%;
+          background-size: contain;
+          background-repeat: no-repeat;
+          aspect-ratio: 1 / 1;
+          background-position: 2px 1px;
+
+          &.poe2-SkillsMainWeap-1 {
+            background-image: url(~assets/ui/skillpanelpopupswap1.webp);
+          }
+          &.poe2-SkillsMainWeap-2 {
+            background-image: url(~assets/ui/skillpanelpopupswap2.webp);
+          }
+        }
+      }
+    }
+    .poe2-gem-list {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0.6% 0 0 6.6%;
+      gap: 4.7%;
+    }
+    .poe2-gem {
+      font-size: 28px;
+      width: 1em;
+      height: 1em;
+      padding: 0;
+      background-size: 1em;
+
+      &:first-child {
+        font-size: 36px;
+        margin-right: 1%;
+        padding: 0.1em;
+        img {
+          display: block;
+          width: 0.8em;
+          height: 0.8em;
+          cursor: pointer;
+        }
+      }
+      &:not(:first-child) {
+        .poe2-gem-mask {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 100%;
+
+          overflow: hidden;
+          width: 0.7em;
+          height: 0.7em;
+          margin: 0.15em;
+        }
+      }
+      &.poe2-gem-white {
+        background-image: url(~assets/ui/skillpanelsocketactiveexpandwhite.webp);
+      }
+      img {
+        display: block;
+        width: 1.2em;
+        height: 1.2em;
+        cursor: pointer;
+      }
+      position: relative;
+    }
+
+    .poe2-progression {
+      display: flex;
+      flex-direction: row;
+      font-size: 18px;
+      border: 1px solid #2d3134;
+      box-shadow: inset 0 0 3px 1px #000;
+      padding: 1px;
+      .ui-Slider {
+        flex-grow: 1;
+        border: none;
+        background: none;
+        .ui-Slider-thumb {
+          cursor: pointer;
+          margin-top: -0.5em;
+          height: 1em;
+          border: none;
+          background: url(~assets/ui/slider_thumb.png);
+          &:active {
+            background: url(~assets/ui/slider_thumb_pressed.png);
+          }
+        }
+      }
+      .poe2-button {
+        width: 1em;
+        height: 1em;
+        &.poe2-plus {
+          background: url(~assets/ui/slider_plus.png);
+        }
+        &.poe2-plus.poe2-disabled {
+          background: url(~assets/ui/slider_plus_disabled.png);
+        }
+        &.poe2-minus {
+          background: url(~assets/ui/slider_minus.png);
+        }
+        &.poe2-minus.poe2-disabled {
+          background: url(~assets/ui/slider_minus_disabled.png);
+        }
+        text-align: center;
+        font-family: monospace;
+        line-height: 1em;
+        cursor: pointer;
+        user-select: none;
+      }
+    }
+  }
+  .poe2-LinkView {
+    width: 94px;
+    height: 141px;
+    display: flex;
+    flex-direction: column;
+    font-size: 100px;
+  }
+}
+
+@media (min-width: 768px) {
+  .poe2planner-wrapper {
+    .poe2-SkillGems {
+      width: 430px;
+      .poe2-BkgStack {
+        .poe2-TitleBarBkg {
+          .poe2-TitleBar-Title {
+            font-size: 18px;
+          }
+        }
+      }
+
+      .poe2-step-title {
+        top: 13%;
+      }
+      .poe2-body {
+        max-height: 443px;
+      }
+
+      .poe2-gem-list {
+        gap: 4.6%;
+      }
+
+      .poe2-gem {
+        font-size: 36px;
+        &:first-child {
+          font-size: 46px;
+        }
+      }
+    }
+  }
+}

@@ -10,6 +10,7 @@
     "vendor:game-data": "bash scripts/vendor-external-poe-data.sh",
     "vendor:pob-tree": "node scripts/vendor-pob-tree.mjs",
     "vendor:poe2db": "node scripts/vendor-poe2db.mjs",
+    "build:planner-css": "node scripts/build-poe2-planner-css.mjs",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:push": "prisma db push",
@@ -32,6 +33,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
     "prisma": "^5.22.0",
+    "sass": "^1.99.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist } from 'next/font/google';
 import './globals.css';
+import './styles/poe2-planner-maxroll.css';
 import Navbar from '@/components/Navbar';
 
 const geist = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });

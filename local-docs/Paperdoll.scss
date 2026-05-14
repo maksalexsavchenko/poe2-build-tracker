@@ -1,0 +1,457 @@
+@import 'common';
+
+.poe2planner-wrapper {
+  .poe2-Paperdoll {
+    width: 340px;
+    position: relative;
+
+    .poe2-BkgStack {
+      width: 100%;
+
+      .poe2-TitleBarBkg {
+        position: relative;
+        z-index: 1;
+        background-image: url(~assets/ui/titlebar.webp);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        width: 100%;
+        aspect-ratio: 972 / 156;
+
+        .poe2-TitleBar-Title {
+          position: absolute;
+          top: 59%;
+          left: 50%;
+          transform: translateX(-50%);
+          color: black;
+          font-size: 14px;
+          font-family: OptimusPrinceps, FontinSmallCaps, Verdana, Arial, Helvetica, sans-serif;
+          line-height: 1.2em;
+          text-shadow: 0 0 1px #000;
+        }
+      }
+
+      .poe2-InventoryBkg {
+        position: relative;
+        margin-top: -16px;
+        background-image: url(~assets/ui/inventorypanelupperbackground.webp);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        width: 100%;
+        aspect-ratio: 1312 / 1020;
+      }
+
+      .poe2-SwapMain1Bkg {
+        background-image: url(~assets/ui/inventorypanelweaponswap1active.webp);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 19.8%;
+        left: 13.6%;
+        width: 4.6%;
+        height: 4.2%;
+      }
+
+      .poe2-SwapMain2Bkg {
+        background-image: url(~assets/ui/inventorypanelweaponswap2inactive.webp);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 19.8%;
+        left: 18.2%;
+        width: 4.6%;
+        height: 4.2%;
+      }
+
+      .poe2-SwapOff1Bkg {
+        background-image: url(~assets/ui/inventorypanelweaponswap1active.webp);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 19.8%;
+        left: 76.6%;
+        width: 4.6%;
+        height: 4.2%;
+      }
+
+      .poe2-SwapOff2Bkg {
+        background-image: url(~assets/ui/inventorypanelweaponswap2inactive.webp);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 19.8%;
+        left: 81.2%;
+        width: 4.6%;
+        height: 4.2%;
+      }
+
+      .poe2-PotionLeftBkg {
+        background-image: url(~assets/ui/inventorypanelpotionlifeleft.webp);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 79.8%;
+        left: 24.2%;
+        width: 12%;
+        height: 18.2%;
+      }
+
+      .poe2-PotionRightBkg {
+        background-image: url(~assets/ui/inventorypanelpotionmanaright.webp);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 79.8%;
+        left: 63.8%;
+        width: 12%;
+        height: 18.2%;
+      }
+
+      .poe2-CharmsBkg {
+        background-image: url(~assets/ui/inventorypanelcharmslots3x1.webp);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 82.4%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 26.8%;
+        height: 10.4%;
+      }
+    }
+
+    &.poe2-swapped {
+      .poe2-BkgStack {
+        .poe2-SwapMain1Bkg {
+          background-image: url(~assets/ui/inventorypanelweaponswap1inactive.webp);
+        }
+
+        .poe2-SwapMain2Bkg {
+          background-image: url(~assets/ui/inventorypanelweaponswap2active.webp);
+        }
+
+        .poe2-SwapOff1Bkg {
+          background-image: url(~assets/ui/inventorypanelweaponswap1inactive.webp);
+        }
+
+        .poe2-SwapOff2Bkg {
+          background-image: url(~assets/ui/inventorypanelweaponswap2active.webp);
+        }
+      }
+    }
+
+    .poe2-JewelSlots {
+      padding-top: 284px;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+      .poe2-PaperdollSlot {
+        position: relative;
+        width: 48px;
+        height: 48px;
+        margin: 8px 4px 0;
+        border: 1px solid #888;
+        border-radius: 4px;
+      }
+      .poe2-empty ~ .poe2-empty {
+        display: none;
+      }
+    }
+    &:not(.poe2-editing) .poe2-JewelSlots .poe2-PaperdollSlot.poe2-empty {
+      display: none;
+    }
+
+    font-size: 30px;
+
+    .poe2-PaperdollSlot {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 3px;
+
+      &:hover .poe2-socket-container {
+        display: flex;
+      }
+
+      // &:not(.poe2-empty) {
+      //   background: rgba(25, 26, 150, 0.25);
+      // }
+
+      &.poe2-active {
+        box-shadow: 0 0 3px 3px #ff8;
+      }
+    }
+    .poe2-ItemDisplay {
+      font-size: 40px;
+    }
+
+    .poe2-slot-Helm {
+      left: 42%;
+      top: 21.2%;
+      width: 15.6%;
+      height: 17%;
+    }
+    .poe2-slot-BodyArmour {
+      left: 42%;
+      top: 41%;
+      width: 15.6%;
+      height: 26%;
+    }
+    .poe2-slot-Belt {
+      left: 42%;
+      top: 69.8%;
+      width: 15.6%;
+      height: 8.2%;
+    }
+    .poe2-slot-Gloves {
+      left: 22.4%;
+      top: 61%;
+      width: 15.4%;
+      height: 17%;
+    }
+    .poe2-slot-Boots {
+      left: 61.8%;
+      top: 61%;
+      width: 15.4%;
+      height: 17%;
+    }
+    .poe2-slot-Amulet {
+      left: 61.8%;
+      top: 39%;
+      width: 7.4%;
+      height: 8%;
+    }
+    .poe2-slot-Ring {
+      left: 30.4%;
+      top: 50%;
+      width: 7.4%;
+      height: 8%;
+    }
+    .poe2-slot-Ring2 {
+      left: 61.8%;
+      top: 50%;
+      width: 7.4%;
+      height: 8%;
+    }
+    .poe2-slot-Flask1 {
+      left: 26.6%;
+      top: 80.6%;
+      width: 7%;
+      height: 16.6%;
+    }
+    .poe2-slot-Flask2 {
+      left: 66%;
+      top: 80.6%;
+      width: 7%;
+      height: 16.6%;
+    }
+    .poe2-slot-Charm1 {
+      left: 37.6%;
+      top: 83.6%;
+      width: 7.4%;
+      height: 8%;
+    }
+    .poe2-slot-Charm2 {
+      left: 46%;
+      top: 83.6%;
+      width: 7.4%;
+      height: 8%;
+    }
+    .poe2-slot-Charm3 {
+      left: 54.4%;
+      top: 83.6%;
+      width: 7.4%;
+      height: 8%;
+    }
+    .poe2-slot-Weapon {
+      left: 10.6%;
+      top: 23.4%;
+      width: 15.4%;
+      height: 34.8%;
+    }
+    .poe2-slot-Offhand {
+      left: 73.6%;
+      top: 23.4%;
+      width: 15.4%;
+      height: 34.8%;
+    }
+
+    .poe2-slot-WeaponMini,
+    .poe2-slot-OffhandMini {
+      width: 28px;
+      height: 50px;
+      background: url(~assets/ui/weapon_swap_mini.png);
+      &:not(.poe2-empty) {
+        background: url(~assets/ui/weapon_swap_mini.png);
+      }
+      font-size: 11px;
+      .poe2-ItemDisplay {
+        width: 28px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+    .poe2-slot-WeaponMini {
+      left: 87px;
+      top: 18px;
+    }
+    .poe2-slot-OffhandMini {
+      left: 224px;
+      top: 18px;
+    }
+
+    .poe2-mirror .poe2-ItemDisplay {
+      filter: opacity(50%);
+    }
+
+    .poe2-SwapButton {
+      top: 19.6%;
+      width: 9.4%;
+      height: 4%;
+      position: absolute;
+      cursor: pointer;
+      &.poe2-weapon {
+        left: 13.4%;
+      }
+      &.poe2-offhand {
+        left: 76.4%;
+      }
+    }
+  }
+
+  .poe2-ItemDisplay {
+    font-size: 50px;
+    position: relative;
+    &.poe2-iw1 {
+      width: 1em;
+    }
+    &.poe2-iw2 {
+      width: 2em;
+    }
+    &.poe2-ih1 {
+      height: 1em;
+    }
+    &.poe2-ih2 {
+      height: 2em;
+    }
+    &.poe2-ih3 {
+      height: 3em;
+    }
+    &.poe2-ih4 {
+      height: 4em;
+    }
+    .poe2-img {
+      position: absolute;
+      inset: 0;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    .poe2-socket-container {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+      display: flex;
+    }
+    &:hover .poe2-socket-container {
+      display: flex;
+    }
+  }
+
+  .poe2-shapeshift {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    display: flex;
+    flex-direction: row;
+    gap: 0px;
+    & > div {
+      font-size: 19px;
+      width: 1em;
+      height: 1em;
+      background-image: url(~assets/ui/talisman.webp);
+      background-size: 3em 4em;
+      &.poe2-active {
+        background-position-y: -2em;
+      }
+      &:hover {
+        background-position-y: -1em;
+      }
+      &.poe2-active:hover {
+        background-position-y: -3em;
+      }
+    }
+    .poe2-shapeshift-bear {
+      background-position-x: 0;
+    }
+    .poe2-shapeshift-wolf {
+      background-position-x: -1em;
+    }
+    .poe2-shapeshift-wyvern {
+      background-position-x: -2em;
+    }
+  }
+
+  .poe2-SocketImage {
+    cursor: pointer;
+    position: relative;
+    width: 0.37em;
+    height: 0.37em;
+    //margin: 0.07em;
+    background-image: url(~assets/ui/runes.webp);
+    background-size: auto 100%;
+    &.poe2-rune::before,
+    &.poe2-soul-core::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url(~assets/ui/runes.webp);
+      background-size: auto 100%;
+    }
+    &.poe2-rune::before {
+      background-position-x: -100%;
+    }
+    &.poe2-soul-core::before {
+      background-position-x: -200%;
+    }
+  }
+  .poe2-SocketRow {
+    display: flex;
+    flex-direction: row;
+    gap: 0.1em;
+    margin: 0.1em 0;
+  }
+  .poe2-ItemDisplay-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .poe2-label {
+      font-size: 14px;
+      font-family: FontinSmallCaps, Verdana, Arial, Helvetica, sans-serif;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .poe2planner-wrapper {
+    .poe2-Paperdoll {
+      width: 430px;
+      .poe2-BkgStack {
+        .poe2-TitleBarBkg {
+          .poe2-TitleBar-Title {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+}
