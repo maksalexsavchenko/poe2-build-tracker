@@ -10,3 +10,10 @@ prisma/migrations/
 
 # RePoE (npm run vendor:game-data / Docker) — великі JSON, не в git
 public/data/repoe-poe2/
+
+# Декоративні PNG-кільця орбіт — не рендеримо їх, виглядали як хаотичні «дужки»
+public/data/poe2-tree/orbits/
+
+# Локальні artefacts
+tsconfig.tsbuildinfo
+.claude/launch.json

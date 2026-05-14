@@ -4,10 +4,10 @@ export const guides: Guide[] = [
   {
     id: 'invoker-fireball',
     title: 'Fireball Invoker',
-    class: 'Witch',
+    class: 'Monk',
     ascendancy: 'Invoker',
     description:
-      'Найпопулярніший стартовий білд для Witch. Простий у левелінгу, потужний в ендгеймі. Ідеально підходить для новачків.',
+      'Потужний Monk/Invoker білд на базі Fireball. Елементальний тригер-кастер — автоматичний cast через Invoker механіку. Відмінний для зачистки мап.',
     tags: ['beginner', 'ssf-viable', 'fire', 'spell'],
     difficulty: 'beginner',
     author: 'poe2tracker',
@@ -28,7 +28,9 @@ export const guides: Guide[] = [
         label: 'Акт 1',
         notes:
           'Завершуємо Act 1. Купуємо Fireball у торговця після вбивства Hillock. Flame Wall — хороший другий скіл для синергії.',
-        passives: [10001, 10002, 10003, 10004, 10005],
+        // TODO(passives): підставити справжні skill-id, дотичні до Monk start (44683).
+        // Зараз — порожньо, бо попередній набір був випадковим (ноди по всьому дереву).
+        passives: [],
         skills: [
           {
             gem: { id: 'fireball', name: 'Fireball', color: 'red', type: 'active' },
@@ -67,7 +69,8 @@ export const guides: Guide[] = [
         label: 'Акт 2',
         notes:
           'Пройшли Act 2. Додаємо Spell Echo — величезний DPS бусt. Починаємо шукати нормальну зброю.',
-        passives: [10001, 10002, 10003, 10004, 10005, 20001, 20002, 20003, 20004],
+        // TODO(passives): підставити коректний шлях до елементальних/fire нот для Act 2
+        passives: [],
         skills: [
           {
             gem: { id: 'fireball', name: 'Fireball', color: 'red', type: 'active' },
@@ -123,7 +126,9 @@ export const guides: Guide[] = [
         label: 'Ранні мапи',
         notes:
           'Середина гри. Додаємо Flammability як curse для Boss боїв. Час серйозно зайнятись шоломом та чоботами.',
-        passives: [10001, 10002, 10003, 10004, 10005, 20001, 20002, 20003, 20004, 30001, 30002, 30003, 30004, 30005],
+        // TODO(passives): запозичити правильний ендгейм-набір з maxroll/PoB build-share.
+        // Пуста — щоб не малювати випадкові ноди по всьому дереву.
+        passives: [],
         skills: [
           {
             gem: { id: 'fireball', name: 'Fireball', color: 'red', type: 'active' },
@@ -204,7 +209,8 @@ export const guides: Guide[] = [
         level: 15,
         label: 'Акт 1',
         notes: 'Act 1. Фокус на Storm Strike як головний скіл.',
-        passives: [40001, 40002, 40003, 40004],
+        // TODO(passives): підставити справжні skill-id для Stormweaver на Monk-старті
+        passives: [],
         skills: [
           {
             gem: { id: 'storm_strike', name: 'Storm Strike', color: 'blue', type: 'active' },
@@ -229,7 +235,7 @@ export const guides: Guide[] = [
         level: 35,
         label: 'Акт 2–3',
         notes: 'Act 2-3. Chain Lightning для зачистки. Починаємо будувати defensives.',
-        passives: [40001, 40002, 40003, 40004, 50001, 50002, 50003],
+        passives: [],
         skills: [
           {
             gem: { id: 'storm_strike', name: 'Storm Strike', color: 'blue', type: 'active' },
@@ -293,7 +299,8 @@ export const guides: Guide[] = [
         level: 20,
         label: 'Акт 1–2',
         notes: 'Левелімось на Split Arrow до Tornado Shot.',
-        passives: [60001, 60002, 60003, 60004, 60005],
+        // TODO(passives): підставити справжні skill-id для Deadeye стартового шляху
+        passives: [],
         skills: [
           {
             gem: { id: 'split_arrow', name: 'Split Arrow', color: 'green', type: 'active' },

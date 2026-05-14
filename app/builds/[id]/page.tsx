@@ -5,9 +5,8 @@ import { getGuideById, guides } from '@/lib/guides-data';
 import DownloadBuildButton from '@/components/DownloadBuildButton';
 import GuideContent from '@/components/GuideContent';
 import { GuidePlannerLinks } from '@/components/GuidePlannerLinks';
-import { AscendancyPassiveMap } from '@/components/AscendancyPassiveMap';
+import { PassiveTreeViewer } from '@/components/PassiveTreeViewer';
 import { getAscendancy } from '@/lib/classes-data';
-import { loadAscendancyFromRepoe } from '@/lib/repoe/load-ascendancy-from-repoe';
 import { ascendancyToClassId } from '@/lib/poe2-tree/types';
 
 export function generateStaticParams() {
@@ -20,9 +19,8 @@ export default async function GuidePage({ params }: { params: Promise<{ id: stri
   if (!guide) notFound();
 
   const asc = getAscendancy(guide.class, guide.ascendancy);
-  const { nodes: ascTreeNodes, descriptions: ascTreeDesc, edges: ascTreeEdges } = await loadAscendancyFromRepoe(
-    guide.ascendancy,
-  );
+  // Collect all allocated nodes from the last (endgame) leveling step
+  const endgamePassives = guide.levelingPath[guide.levelingPath.length - 1]?.passives ?? [];
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
@@ -137,13 +135,7 @@ export default async function GuidePage({ params }: { params: Promise<{ id: stri
 
       <GuidePlannerLinks guide={guide} ascendancyClassId={ascendancyToClassId(guide.ascendancy)} />
 
-      <AscendancyPassiveMap
-        ascendancyName={guide.ascendancy}
-        classId={ascendancyToClassId(guide.ascendancy)}
-        nodes={ascTreeNodes}
-        descriptions={ascTreeDesc}
-        edges={ascTreeEdges}
-      />
+      <PassiveTreeViewer allocatedNodes={endgamePassives} ascendancyName={guide.ascendancy} />
 
       {/* Leveling path — tabbed + skills panel */}
       <div>
